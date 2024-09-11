@@ -11,6 +11,7 @@ public class Jump : MonoBehaviour
     //private bool above= false;
     public float height = 0;
     public bool isdead = false;
+    Vector3 pos;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +31,7 @@ public class Jump : MonoBehaviour
             velocity.y = gravity;
         }
 
-        Vector3 pos = transform.position;
+        pos = transform.position;
         if (pos.y < -12.5){
             isdead = true;
             return;
@@ -38,22 +39,8 @@ public class Jump : MonoBehaviour
 
 
         pos.y += velocity.y * Time.fixedDeltaTime;
+        move();
         
-        if ((transform.position.y > GameObject.FindGameObjectWithTag("MainCamera").transform.position.y)&&(velocity.y>0)){
-            GameObject[] platforms = GameObject.FindGameObjectsWithTag("platform");
-            foreach (GameObject platform in platforms){
-                Vector3 pos2 = platform.transform.position;
-                pos2.y -= velocity.y*Time.fixedDeltaTime;
-                platform.transform.position = pos2;
-            }
-            velocity.y += gravity  * Time.fixedDeltaTime;
-            height += velocity.y * Time.fixedDeltaTime;
-            
-        }else{
-            height += velocity.y * Time.fixedDeltaTime;
-            velocity.y += gravity  * Time.fixedDeltaTime;
-            transform.position = pos;
-        }
         
 
     }
@@ -67,5 +54,39 @@ public class Jump : MonoBehaviour
             isdead = true;  
         }
         
+    }
+    void OnTriggerEnter2D(Collider2D collider){
+        //Debug.Log("in");
+        if (collider.gameObject.name == "brokenplatform(Clone)"){
+            Destroy(collider.gameObject);
+            
+        }
+    }
+
+    void move(){
+        if ((transform.position.y > GameObject.FindGameObjectWithTag("MainCamera").transform.position.y)&&(velocity.y>0)){
+            GameObject[] platforms = GameObject.FindGameObjectsWithTag("platform");
+            foreach (GameObject platform in platforms){
+                Vector3 pos2 = platform.transform.position;
+                pos2.y -= velocity.y*Time.fixedDeltaTime;
+                platform.transform.position = pos2;
+            }
+            moveobject("brokenplatform");
+            velocity.y += gravity  * Time.fixedDeltaTime;
+            height += velocity.y * Time.fixedDeltaTime;
+            
+        }else{
+            height += velocity.y * Time.fixedDeltaTime;
+            velocity.y += gravity  * Time.fixedDeltaTime;
+            transform.position = pos;
+        }
+    }
+    void moveobject(string objecte){
+        GameObject[] objects = GameObject.FindGameObjectsWithTag(objecte);
+        foreach (GameObject item in objects){
+                Vector3 pos2 = item.transform.position;
+                pos2.y -= velocity.y*Time.fixedDeltaTime;
+                item.transform.position = pos2;
+            }
     }
 }

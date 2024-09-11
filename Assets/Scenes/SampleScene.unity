@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemPrefab: {fileID: 3271302383174094828, guid: 06d590ee7f16e6b49aa31ad1ac13700c, type: 3}
+  brokenplatform: {fileID: 3777657622412684710, guid: b00646456d5475c448d23148ab296c29, type: 3}
   radius: 1
 --- !u!4 &35270409
 Transform:
@@ -1419,8 +1420,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -39}
-  m_SizeDelta: {x: 186.96, y: 27.9}
+  m_AnchoredPosition: {x: 0.792, y: -40.556}
+  m_SizeDelta: {x: 158.954, y: 28.535}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1702438765
 MonoBehaviour:
