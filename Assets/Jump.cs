@@ -50,16 +50,18 @@ public class Jump : MonoBehaviour
         if (collider.gameObject.tag == "platform"){
             velocity.y = jumpvelo; 
         }
-        if (collider.gameObject.tag == "mob"){
-            isdead = true;  
-        }
+        
         
     }
     void OnTriggerEnter2D(Collider2D collider){
-        //Debug.Log("in");
+        Debug.Log("in");
         if (collider.gameObject.name == "brokenplatform(Clone)"){
             Destroy(collider.gameObject);
             
+        }
+        if (collider.gameObject.name == "Ennemy(Clone)"){
+            isdead = true;
+            Debug.Log("dead");  
         }
     }
 

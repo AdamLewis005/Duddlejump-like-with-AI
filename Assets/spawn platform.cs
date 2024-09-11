@@ -6,6 +6,7 @@ public class spawnplatform : MonoBehaviour
 {
     public GameObject ItemPrefab;
     public GameObject brokenplatform;
+    public GameObject Ennemy;
     public float radius = 1;
     private float max = -5;
     private float maxdist = 5.0f;
@@ -57,6 +58,10 @@ public class spawnplatform : MonoBehaviour
             if (Random.Range(0,5)==0){
                 Vector3 radomPos2 = new Vector3(Random.Range(-3.0f,3.0f),max2 + Random.Range(mindist,maxdist),0);
                 Instantiate(brokenplatform,radomPos2,Quaternion.identity);
+            }
+            if (Random.Range(0,5)==0){
+                Vector3 radomPos2 = new Vector3(Random.Range(-3.0f,3.0f),max2 + Random.Range(mindist,maxdist),0);
+                Instantiate(Ennemy,radomPos2,Quaternion.identity);
             }
             Vector3 radomPos = new Vector3(Random.Range(-3.0f,3.0f),max2 + Random.Range(mindist,maxdist),0);
             Instantiate(ItemPrefab,radomPos,Quaternion.identity);

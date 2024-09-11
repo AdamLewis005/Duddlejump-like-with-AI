@@ -154,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemPrefab: {fileID: 3271302383174094828, guid: 06d590ee7f16e6b49aa31ad1ac13700c, type: 3}
   brokenplatform: {fileID: 3777657622412684710, guid: b00646456d5475c448d23148ab296c29, type: 3}
+  Ennemy: {fileID: 8628767471137855754, guid: 36ec715965960fb4aa409d51da01ca50, type: 3}
   radius: 1
 --- !u!4 &35270409
 Transform:
