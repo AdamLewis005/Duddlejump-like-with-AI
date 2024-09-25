@@ -74,6 +74,7 @@ public class Jump : MonoBehaviour
                 platform.transform.position = pos2;
             }
             moveobject("brokenplatform");
+            moveobject("ennemy");
             velocity.y += gravity  * Time.fixedDeltaTime;
             height += velocity.y * Time.fixedDeltaTime;
             

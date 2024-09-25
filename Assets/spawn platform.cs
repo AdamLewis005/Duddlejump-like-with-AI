@@ -59,7 +59,7 @@ public class spawnplatform : MonoBehaviour
                 Vector3 radomPos2 = new Vector3(Random.Range(-3.0f,3.0f),max2 + Random.Range(mindist,maxdist),0);
                 Instantiate(brokenplatform,radomPos2,Quaternion.identity);
             }
-            if (Random.Range(0,5)==0){
+            if (Random.Range(0,10)==0){
                 Vector3 radomPos2 = new Vector3(Random.Range(-3.0f,3.0f),max2 + Random.Range(mindist,maxdist),0);
                 Instantiate(Ennemy,radomPos2,Quaternion.identity);
             }

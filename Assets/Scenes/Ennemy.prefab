@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 4014229746365486889}
   - component: {fileID: 1553112207143067296}
   - component: {fileID: 1438392906240602273}
+  - component: {fileID: 4315320158580533815}
   m_Layer: 0
   m_Name: Ennemy
-  m_TagString: platform
+  m_TagString: ennemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -130,3 +131,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4315320158580533815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8628767471137855754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc7406c6aa300cd40822f7fa2b7f27bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movevelo: 2
