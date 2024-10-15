@@ -105,7 +105,7 @@ public class AIControler : UnitController
         velocity = transform.position;
         velocity.x += (float)outputSignalArray[0]*movevelo*Time.fixedDeltaTime;
         transform.position = velocity;
-        Debug.Log(outputSignalArray[0]);
+        //Debug.Log(outputSignalArray[0]);
         
         /*
         if ((bool)outputSignalArray[0]){
@@ -156,7 +156,7 @@ public class AIControler : UnitController
             }
             transform.position = _initialPosition;
             transform.rotation = _initialRotation;
-            Debug.Log(ai.score);
+            //Debug.Log(ai.score);
             ai.score = 0;
             ai.height = 0;
             ai.isdead = false;

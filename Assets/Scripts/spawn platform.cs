@@ -95,16 +95,21 @@ public class spawnplatform : MonoBehaviour
         foreach(GameObject platform in platforms){
             DestroyImmediate(platform);
         }
-        GameObject[] ennemys = GameObject.FindGameObjectsWithTag("ennemy");
-        foreach(GameObject ennemy in ennemys){
-            Destroy(ennemy);
-        }
+        deleteObjects("ennemy");
+        deleteObjects("brokenplatform");
+        
 
         Instantiate(ground,t,Quaternion.identity);
         max = -5; 
         for(int i=0;i<8;i++)
             SpawnObjectstart();
 
+    }
+    void deleteObjects(string tag){
+        GameObject[] Objects = GameObject.FindGameObjectsWithTag(tag);
+        foreach(GameObject Object in Objects){
+            Destroy(Object);
+        }
     }
 
 /*

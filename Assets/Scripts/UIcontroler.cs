@@ -14,28 +14,32 @@ public class UIcontroler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scoretext =  GameObject.Find("Score").GetComponent<Text>();
-        over.SetActive(false );
+        
     }
 
     void Awake(){
         //player = GameObject.FindGameObjectWithTag("player").GetComponent<Jump>();
 
         distanceText = GameObject.FindGameObjectWithTag("score").GetComponent<Text>();
-        over = GameObject.Find("Over");
+        
         
         
         
     }
     public void setplayer(Jump player){
         this.player = player;
+        if (player.name == "Player"){
+            scoretext =  GameObject.Find("Score").GetComponent<Text>();
+            over = GameObject.Find("Over");
+            over.SetActive(false );
+        }
     }
     // Update is called once per frame 
     void Update()
     {   
         if (player != null){
         distanceText.text = player.score + " m";
-        if(player.isdead){
+        if(player.isdead && player.name == "Player"){
             over.SetActive(true);
             scoretext.text = "Score : " + player.score + " m";
         }

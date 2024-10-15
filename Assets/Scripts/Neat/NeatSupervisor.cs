@@ -33,10 +33,10 @@ namespace UnitySharpNEAT
         private string _experimentConfigFileName = "experiment.config";
 
         [SerializeField]
-        private int _networkInputCount = 5;
+        private int _networkInputCount = 6;
 
         [SerializeField]
-        private int _networkOutputCount = 2;
+        private int _networkOutputCount = 1;
 
 
         [Header("Evaluation Settings")]
@@ -240,7 +240,7 @@ namespace UnitySharpNEAT
         private UnitController InstantiateUnit(IBlackBox box)
         {
             UnitController controller = Instantiate(_unitControllerPrefab, _unitControllerPrefab.transform.position, _unitControllerPrefab.transform.rotation);
-
+            
             if (_spawnParent != null)
                 controller.transform.parent = _spawnParent;
             else

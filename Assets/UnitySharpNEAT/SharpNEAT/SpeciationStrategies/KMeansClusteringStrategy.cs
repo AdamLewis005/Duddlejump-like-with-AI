@@ -92,7 +92,8 @@ namespace SharpNeat.SpeciationStrategies
             // of the species become empty.
             // This approach ensures that each species will have at least one genome - because that genome is the specie 
             // centroid and therefore has distance of zero from the centroid (itself).
-            int specieCount = specieList.Count;
+            int specieCount = specieList.Count; 
+            
             for(int i=0; i<specieCount; i++)
             {
                 Specie<TGenome> specie = specieList[i];

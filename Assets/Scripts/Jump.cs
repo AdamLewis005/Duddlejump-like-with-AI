@@ -23,6 +23,7 @@ public class Jump : MonoBehaviour
         sp = GameObject.FindGameObjectWithTag("Respawn").GetComponent<spawnplatform>();
         sp.setplayer(this);
         ui = GameObject.FindGameObjectWithTag("ui").GetComponent<UIcontroler>();
+        ui.setplayer(this);
     }
 
 
@@ -87,6 +88,7 @@ public class Jump : MonoBehaviour
             }
             moveobject("brokenplatform");
             moveobject("ennemy");
+            moveplayer();
             velocity.y += gravity  * Time.fixedDeltaTime;
             height += velocity.y * Time.fixedDeltaTime;
             
@@ -102,6 +104,16 @@ public class Jump : MonoBehaviour
                 Vector3 pos2 = item.transform.position;
                 pos2.y -= velocity.y*Time.fixedDeltaTime;
                 item.transform.position = pos2;
+            }
+    }
+    void moveplayer(){
+        GameObject[] players = GameObject.FindGameObjectsWithTag("player");
+        foreach (GameObject item in players){
+                if (item != gameObject) {
+                    Vector3 pos2 = item.transform.position;
+                    pos2.y -= velocity.y*Time.fixedDeltaTime;
+                    item.transform.position = pos2;
+                }
             }
     }
 }

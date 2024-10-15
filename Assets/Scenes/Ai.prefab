@@ -205,4 +205,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SensorRange: 10
   movevelo: 5
-  ItemPrefab: {fileID: 2824322643401721458, guid: bf124e66fd05bc24083752afbd3f3802, type: 3}
+  uniqueID: 0
