@@ -9,7 +9,7 @@ public class AIControler : UnitController
 {
     private Vector3 _initialPosition = default;
     private Quaternion _initialRotation;
-    public float SensorRange = 10;
+    public float SensorRange = 5;
     public float movevelo = 5;
     private Vector3 velocity;
     private Vector3 pos;
@@ -55,9 +55,79 @@ public class AIControler : UnitController
         // Feed inputs into the Neural Net (IBlackBox) by modifying its InputSignalArray
         // The size of the input array corresponds to NeatSupervisor.NetworkInputCount
         RaycastHit hit;
-        if (Physics.Raycast(transform.position + transform.forward * 1.1f, transform.TransformDirection(new Vector3(0, 1,0).normalized), out hit, SensorRange)){
+        
+        RaycastHit2D hit2;
+
+        Vector3 origin = transform.position+transform.up * 1.1f ;
+        origin.z = 0;  // Force the z-position of the origin to 0, though irrelevant in 2D
+
+        // Set the direction as upwards in local space (along the y-axis)
+        Vector2 directionup = Vector2.up;
+        Vector2 directionupright =new Vector2(1, -1);
+        Vector2 directionupleft = new Vector2(-1, 1);
+        Vector2 directiondown = Vector2.down;
+        Vector2 directionright =Vector2.right;
+        Vector2 directionleft =Vector2.left;
+
+
+        // Draw the ray for visualization (green line)
+        Debug.DrawLine(origin, origin + (Vector3)directionup * SensorRange, Color.green);
+
+        // Perform a 2D raycast and log the hit information
+        hit2 = Physics2D.Raycast(origin, directionup,SensorRange);
+        if (hit2){
+            //Debug.Log("hit "+hit2.collider.tag);
+        if (hit2.collider.CompareTag("platform"))
+        {
+            upSensor = 1 - hit2.distance / SensorRange;
+            //Debug.Log("hit"+upSensor);
+        }}
+
+        hit2 = Physics2D.Raycast(origin, directionupleft,SensorRange);
+        if (hit2){
+        if (hit2.collider.CompareTag("platform"))
+        {
+            leftupSensor = 1 - hit2.distance / SensorRange;
+        }}
+
+        hit2 = Physics2D.Raycast(origin, directionupright,SensorRange);
+        if (hit2){
+            if (hit2.collider.CompareTag("platform"))
+            {
+                rightupSensor = 1 - hit2.distance / SensorRange;
+            }
+        }
+
+        hit2 = Physics2D.Raycast(origin, directiondown,SensorRange);
+        if (hit2){
+        if (hit2.collider.CompareTag("platform"))
+        {
+            downSensor = 1 - hit2.distance / SensorRange;
+        }}
+
+        hit2 = Physics2D.Raycast(origin, directionright,SensorRange);
+        if (hit2){
+            if (hit2.collider.CompareTag("platform"))
+            {
+                rightSensor = 1 - hit2.distance / SensorRange;
+            }
+        }
+        hit2 = Physics2D.Raycast(origin, directionleft,SensorRange);
+        if (hit2){
+            if (hit2.collider.CompareTag("platform"))
+            {
+                leftSensor = 1 - hit2.distance / SensorRange;
+            }
+        }
+        
+        
+
+/*
+        if (Physics.Raycast(transform.position + transform.right * 1.1f, transform.TransformDirection(new Vector3(0, 1,0).normalized), out hit, SensorRange)){
+            Debug.Log("HIT");
             if (hit.collider.CompareTag("platform")){
-                upSensor = 1 - hit.distance / SensorRange;
+                //upSensor = 1 - hit.distance / SensorRange;
+                
             }
         }
         if (Physics.Raycast(transform.position + transform.forward * 1.1f, transform.TransformDirection(new Vector3(1, 0,0).normalized), out hit, SensorRange)){
@@ -85,6 +155,8 @@ public class AIControler : UnitController
                 leftupSensor = 1 - hit.distance / SensorRange;
             }
         }
+
+*/
         inputSignalArray[0] = upSensor;
         inputSignalArray[1] = leftupSensor;
         inputSignalArray[2] = leftSensor;
@@ -105,7 +177,15 @@ public class AIControler : UnitController
         velocity = transform.position;
         velocity.x += (float)outputSignalArray[0]*movevelo*Time.fixedDeltaTime;
         transform.position = velocity;
-        //Debug.Log(outputSignalArray[0]);
+        //if (uniqueID == 1)
+        //Debug.Log("" + outputSignalArray[0]);
+/*
+        velocity = transform.position;
+        velocity.x -= (float)outputSignalArray[1]*movevelo*Time.fixedDeltaTime;
+        transform.position = velocity;
+*/     
+        
+        
         
         /*
         if ((bool)outputSignalArray[0]){
