@@ -36,7 +36,7 @@ namespace UnitySharpNEAT
         private int _networkInputCount = 6;
 
         [SerializeField]
-        private int _networkOutputCount = 1;
+        private int _networkOutputCount = 2;
 
 
         [Header("Evaluation Settings")]

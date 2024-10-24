@@ -9,7 +9,7 @@ public class AIControler : UnitController
 {
     private Vector3 _initialPosition = default;
     private Quaternion _initialRotation;
-    public float SensorRange = 5;
+    public float SensorRange = 4;
     public float movevelo = 5;
     private Vector3 velocity;
     private Vector3 pos;
@@ -71,7 +71,7 @@ public class AIControler : UnitController
 
 
         // Draw the ray for visualization (green line)
-        Debug.DrawLine(origin, origin + (Vector3)directionup * SensorRange, Color.green);
+        Debug.DrawLine(origin, origin + (Vector3)directiondown * SensorRange, Color.green);
 
         // Perform a 2D raycast and log the hit information
         hit2 = Physics2D.Raycast(origin, directionup,SensorRange);
@@ -82,14 +82,14 @@ public class AIControler : UnitController
             upSensor = 1 - hit2.distance / SensorRange;
             //Debug.Log("hit"+upSensor);
         }}
-
+/*
         hit2 = Physics2D.Raycast(origin, directionupleft,SensorRange);
         if (hit2){
         if (hit2.collider.CompareTag("platform"))
         {
             leftupSensor = 1 - hit2.distance / SensorRange;
         }}
-
+*/
         hit2 = Physics2D.Raycast(origin, directionupright,SensorRange);
         if (hit2){
             if (hit2.collider.CompareTag("platform"))
@@ -97,7 +97,7 @@ public class AIControler : UnitController
                 rightupSensor = 1 - hit2.distance / SensorRange;
             }
         }
-
+/*
         hit2 = Physics2D.Raycast(origin, directiondown,SensorRange);
         if (hit2){
         if (hit2.collider.CompareTag("platform"))
@@ -119,6 +119,8 @@ public class AIControler : UnitController
                 leftSensor = 1 - hit2.distance / SensorRange;
             }
         }
+        
+*/
         
         
 
@@ -157,14 +159,39 @@ public class AIControler : UnitController
         }
 
 */
-        inputSignalArray[0] = upSensor;
-        inputSignalArray[1] = leftupSensor;
-        inputSignalArray[2] = leftSensor;
-        inputSignalArray[3] = rightupSensor;
-        inputSignalArray[4] = rightSensor;
+        inputSignalArray[0] = gameObject.transform.position.x;
+        inputSignalArray[1] = gameObject.transform.position.y;
+        inputSignalArray[2] = GetClosestObject("platform");
+        inputSignalArray[3] = GetClosestObject("ennemy");
+        inputSignalArray[4] = upSensor;
         inputSignalArray[5] = downSensor;
 
         
+    }
+
+    float GetClosestObject(string tag)
+    {
+        GameObject[] objects = GameObject.FindGameObjectsWithTag(tag); 
+        GameObject closest = null;
+        float distance = 0;
+        float minDistance = Mathf.Infinity;
+        Vector3 playerPosition = gameObject.transform.position;
+
+        foreach (GameObject object1 in objects)
+        {
+            //if (object1.transform.position.y > playerPosition.y){
+                distance = Vector3.Distance(playerPosition, object1.transform.position);
+
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    closest = object1;
+                }
+            
+        }
+        if (closest != null)
+            return closest.transform.position.x;
+        return 0;
     }
 
     protected override void UseBlackBoxOutpts(ISignalArray outputSignalArray)
@@ -179,11 +206,11 @@ public class AIControler : UnitController
         transform.position = velocity;
         //if (uniqueID == 1)
         //Debug.Log("" + outputSignalArray[0]);
-/*
+
         velocity = transform.position;
         velocity.x -= (float)outputSignalArray[1]*movevelo*Time.fixedDeltaTime;
         transform.position = velocity;
-*/     
+   
         
         
         
